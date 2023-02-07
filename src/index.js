@@ -20,9 +20,14 @@ module.exports = function check(str, bracketsConfig) {
   for (let i = 0; i < str.length; i++) {
     let currentChar = str[i];
   
-    if (openBrackets.includes(currentChar)) {
-      stack.push(currentChar);
-
+    if (openBrackets.includes(currentChar))  {
+      if (objectConfig[currentChar] === currentChar) {
+        let topStackElement = stack[stack.length-1];
+        objectConfig[currentChar] != topStackElement ?
+          stack.push(currentChar) : stack.pop(); 
+      } else {
+        stack.push(currentChar);
+      }
     } else {
       if (stack.length === 0) {
         return false;
